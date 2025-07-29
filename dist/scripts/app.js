@@ -28,140 +28,201 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-document.addEventListener("DOMContentLoaded", function () {
-  var grid = document.querySelector(".art-grid");
-  var modal = document.querySelector(".art-modal");
-  var modalImg = document.querySelector(".art-modal__image");
-  var modalTitle = document.querySelector(".art-modal__title");
-  var modalArtist = document.querySelector(".art-modal__artist");
-  var modalText = document.querySelector(".art-modal__description");
-  var closeBtn = document.querySelector(".art-modal__close");
-  var backdrop = document.querySelector(".art-modal__backdrop");
+document.addEventListener("DOMContentLoaded", /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee3() {
+  var grid, wrapper, modal, modalBackdrop, modalCloseBtn, modalImage, modalTitle, modalArtist, modalDescription, closeModal, fetchArts, _fetchArts, createCard, cloneCards, init, _init;
 
-  function openModal(art) {
-    modalImg.src = art.primaryImageSmall;
-    modalImg.alt = art.title;
-    modalTitle.textContent = art.title;
-    modalArtist.textContent = art.artistDisplayName || "Artiste inconnu";
-    modalText.textContent = art.creditLine || "Aucune description disponible.";
-    modal.classList.add("is-active");
-  }
+  return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee3$(_context3) {
+    while (1) {
+      switch (_context3.prev = _context3.next) {
+        case 0:
+          _init = function _init3() {
+            _init = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
+              var arts, cards, clones, totalWidth, speed, loopAnim, velocity;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
+                while (1) {
+                  switch (_context2.prev = _context2.next) {
+                    case 0:
+                      _context2.next = 2;
+                      return fetchArts();
 
-  function closeModal() {
-    modal.classList.remove("is-active");
-  }
+                    case 2:
+                      arts = _context2.sent;
 
-  closeBtn.addEventListener("click", closeModal);
-  backdrop.addEventListener("click", closeModal);
+                      if (!(arts.length === 0)) {
+                        _context2.next = 6;
+                        break;
+                      }
 
-  function fetchArt() {
-    return _fetchArt.apply(this, arguments);
-  }
+                      grid.innerHTML = "<p>Aucune œuvre trouvée.</p>";
+                      return _context2.abrupt("return");
 
-  function _fetchArt() {
-    _fetchArt = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      var resIDs, dataIDs, arts, i, resArt, art;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-              _context.prev = 0;
-              _context.next = 3;
-              return fetch("https://collectionapi.metmuseum.org/public/collection/v1/objects?departmentIds=11");
+                    case 6:
+                      cards = arts.map(createCard);
+                      cards.forEach(function (card) {
+                        return grid.appendChild(card);
+                      });
+                      clones = cloneCards(cards);
+                      clones.forEach(function (clone) {
+                        return grid.appendChild(clone);
+                      });
+                      totalWidth = grid.scrollWidth;
+                      gsap.registerPlugin(ScrollTrigger);
+                      speed = 100;
+                      loopAnim = gsap.to(grid, {
+                        x: -totalWidth / 2,
+                        ease: "none",
+                        duration: totalWidth / 2 / speed,
+                        repeat: -1,
+                        modifiers: {
+                          x: gsap.utils.unitize(function (x) {
+                            return parseFloat(x) % (totalWidth / 2);
+                          })
+                        }
+                      });
+                      velocity = 0;
+                      wrapper.addEventListener("wheel", function (e) {
+                        e.preventDefault();
+                        velocity += e.deltaY * 0.5;
+                      });
+                      gsap.ticker.add(function () {
+                        if (Math.abs(velocity) > 0.1) {
+                          loopAnim.time(loopAnim.time() + velocity * 0.01);
+                          velocity *= 0.95;
+                        }
+                      });
 
-            case 3:
-              resIDs = _context.sent;
-              _context.next = 6;
-              return resIDs.json();
+                    case 17:
+                    case "end":
+                      return _context2.stop();
+                  }
+                }
+              }, _callee2);
+            }));
+            return _init.apply(this, arguments);
+          };
 
-            case 6:
-              dataIDs = _context.sent;
+          init = function _init2() {
+            return _init.apply(this, arguments);
+          };
 
-              if (!(!dataIDs.objectIDs || dataIDs.objectIDs.length === 0)) {
-                _context.next = 10;
-                break;
-              }
+          cloneCards = function _cloneCards(cards) {
+            return cards.map(function (card) {
+              var clone = card.cloneNode(true);
+              clone.classList.add("clone");
+              return clone;
+            });
+          };
 
-              grid.innerHTML = "<p>Aucune œuvre trouvée.</p>";
-              return _context.abrupt("return");
+          createCard = function _createCard(art) {
+            var card = document.createElement("div");
+            card.classList.add("art-grid__item");
+            card.innerHTML = "\n      <img src=\"".concat(art.primaryImageSmall, "\" alt=\"").concat(art.title, "\" class=\"art-grid__img\" />\n      <div class=\"art-grid__details\">\n        <h2 class=\"art-grid__title\">").concat(art.title, "</h2>\n        <p class=\"art-grid__author\">").concat(art.artistDisplayName || "Artiste inconnu", "</p>\n      </div>\n    ");
+            card.addEventListener("click", function () {
+              modalImage.src = art.primaryImage || art.primaryImageSmall;
+              modalImage.alt = art.title;
+              modalTitle.textContent = art.title;
+              modalArtist.textContent = "Artiste : ".concat(art.artistDisplayName || "Inconnu");
+              modalDescription.textContent = "Date : ".concat(art.objectDate || "N/A", "\nMedium : ").concat(art.medium || "N/A");
+              modal.classList.add("is-active");
+            });
+            return card;
+          };
 
-            case 10:
-              arts = [];
-              i = 0;
+          _fetchArts = function _fetchArts3() {
+            _fetchArts = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+              var res, data, arts, i, artRes, art;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+                while (1) {
+                  switch (_context.prev = _context.next) {
+                    case 0:
+                      _context.next = 2;
+                      return fetch("https://collectionapi.metmuseum.org/public/collection/v1/objects?departmentIds=11");
 
-            case 12:
-              if (!(arts.length < 4 && i < dataIDs.objectIDs.length)) {
-                _context.next = 24;
-                break;
-              }
+                    case 2:
+                      res = _context.sent;
+                      _context.next = 5;
+                      return res.json();
 
-              _context.next = 15;
-              return fetch("https://collectionapi.metmuseum.org/public/collection/v1/objects/".concat(dataIDs.objectIDs[i]));
+                    case 5:
+                      data = _context.sent;
+                      arts = [];
+                      i = 0;
 
-            case 15:
-              resArt = _context.sent;
+                    case 8:
+                      if (!(arts.length < 6 && i < data.objectIDs.length)) {
+                        _context.next = 20;
+                        break;
+                      }
 
-              if (!resArt.ok) {
-                _context.next = 21;
-                break;
-              }
+                      _context.next = 11;
+                      return fetch("https://collectionapi.metmuseum.org/public/collection/v1/objects/".concat(data.objectIDs[i]));
 
-              _context.next = 19;
-              return resArt.json();
+                    case 11:
+                      artRes = _context.sent;
 
-            case 19:
-              art = _context.sent;
+                      if (!artRes.ok) {
+                        _context.next = 17;
+                        break;
+                      }
 
-              if (art.primaryImageSmall) {
-                arts.push(art);
-              }
+                      _context.next = 15;
+                      return artRes.json();
 
-            case 21:
-              i++;
-              _context.next = 12;
-              break;
+                    case 15:
+                      art = _context.sent;
+                      if (art.primaryImageSmall) arts.push(art);
 
-            case 24:
-              if (!(arts.length === 0)) {
-                _context.next = 27;
-                break;
-              }
+                    case 17:
+                      i++;
+                      _context.next = 8;
+                      break;
 
-              grid.innerHTML = "<p>Aucune œuvre avec image trouvée.</p>";
-              return _context.abrupt("return");
+                    case 20:
+                      return _context.abrupt("return", arts);
 
-            case 27:
-              grid.innerHTML = "";
-              arts.forEach(function (art) {
-                var card = document.createElement("div");
-                card.classList.add("art-grid__item");
-                card.innerHTML = "\n          <img src=\"".concat(art.primaryImageSmall, "\" alt=\"").concat(art.title, "\" class=\"art-grid__img\" />\n          <div class=\"art-grid__details\">\n            <h2 class=\"art-grid__title\">").concat(art.title, "</h2>\n            <p class=\"art-grid__author\">").concat(art.artistDisplayName || "Artiste inconnu", "</p>\n          </div>\n        ");
-                card.addEventListener("click", function () {
-                  return openModal(art);
-                });
-                grid.appendChild(card);
-              });
-              _context.next = 35;
-              break;
+                    case 21:
+                    case "end":
+                      return _context.stop();
+                  }
+                }
+              }, _callee);
+            }));
+            return _fetchArts.apply(this, arguments);
+          };
 
-            case 31:
-              _context.prev = 31;
-              _context.t0 = _context["catch"](0);
-              console.error("Erreur de chargement :", _context.t0);
-              grid.innerHTML = "<p>Erreur lors du chargement des œuvres.</p>";
+          fetchArts = function _fetchArts2() {
+            return _fetchArts.apply(this, arguments);
+          };
 
-            case 35:
-            case "end":
-              return _context.stop();
-          }
-        }
-      }, _callee, null, [[0, 31]]);
-    }));
-    return _fetchArt.apply(this, arguments);
-  }
+          closeModal = function _closeModal() {
+            modal.classList.remove("is-active");
+            modalImage.src = "";
+            modalImage.alt = "";
+            modalTitle.textContent = "";
+            modalArtist.textContent = "";
+            modalDescription.textContent = "";
+          };
 
-  fetchArt();
-});
+          grid = document.querySelector(".art-grid");
+          wrapper = document.querySelector(".art-grid-wrapper");
+          modal = document.querySelector(".art-modal");
+          modalBackdrop = modal.querySelector(".art-modal__backdrop");
+          modalCloseBtn = modal.querySelector(".art-modal__close");
+          modalImage = modal.querySelector(".art-modal__image");
+          modalTitle = modal.querySelector(".art-modal__title");
+          modalArtist = modal.querySelector(".art-modal__artist");
+          modalDescription = modal.querySelector(".art-modal__description");
+          modalBackdrop.addEventListener("click", closeModal);
+          modalCloseBtn.addEventListener("click", closeModal);
+          init();
+
+        case 19:
+        case "end":
+          return _context3.stop();
+      }
+    }
+  }, _callee3);
+})));
 
 /***/ }),
 

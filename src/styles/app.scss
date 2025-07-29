@@ -1,51 +1,39 @@
+@import 'utils/variables';
+@import 'components/type';
 
-// VARIABLES
-$bg-color: #f6f6f6;
-$text-color: #222;
-$primary-color: #000000;
-$white: #f6f6f6;
 
 @font-face {
-  font-family: 'ClashDisplay';
-  src: url('../assets/fonts/TTF/ClashDisplay-Variable.ttf') format('truetype');
-
+  font-family: GaramondStd;
+  src: url("../assets/fonts/ITCGaramondStd-LtCond.ttf");
 }
 
-// RESET & GLOBAL
+html, body {
+  height: auto;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: 'GaramondStd', serif;
+  background-color: #f6f6f6;
+  color: #222;
+  line-height: 1.4;
+}
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'ClashDisplay', sans-serif;
+  
 }
 
-body {
-  background-color: $bg-color;
-  color: $text-color;
-  line-height: 1.6;
-}
 
-img {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
-
-// LAYOUT
-.site-header {
-  &__container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem 1rem;
-  }
-
-  &__title {
-    font-size: 2.5rem;
-    color: $primary-color;
-    font-weight: 600;
-  }
+.site-header__title {
+  font-size: 11rem;
+  margin-left: 10px;
+  color: #000000;
+  font-weight: 600;
 }
 
 .site-main {
@@ -53,65 +41,102 @@ img {
   margin: 0 auto;
 }
 
-.site-footer {
-  font-size: 0.9rem;
-  padding: 1.5rem;
-  color: #777;
-
-  &__note {
-    margin: 0;
-  }
+/* SCROLL HORIZONTAL */
+@font-face {
+  font-family: GaramondStd;
+  src: url("./fonts/ITCGaramondStd-LtCond.ttf");
 }
 
-// GRID
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: 'GaramondStd', serif;
+  background-color: #f6f6f6;
+  color: #222;
+}
+
+
+.art-grid-wrapper {
+  width: 100vw;
+  height: 100vh;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+    overflow-x: auto;   
+  white-space: nowrap; 
+  width: 100%;  
+}
+.art-grid-wrapper::-webkit-scrollbar {
+  display: none; 
+}
+
+
 .art-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  margin: 0 auto;
+  display: flex;
+  gap: 20px;
+  padding: 2rem;
+  align-items: center;
+    display: inline-flex; 
+ 
+   
+}
+
+/* Cartes */
+.art-grid__item {
+  flex: 0 0 300px;
+  height: 450px;
+  scroll-snap-align: center;
+  background: white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden;
+  transition: transform 0.3s;
+  pointer-events: auto;
+  cursor: pointer;
+    display: inline-block;
+  width: 200px;  
+}
+.art-grid__item:hover {
+  transform: scale(1.03);
+}
+
+.art-grid__img {
   width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
 
-  &__item {
-    background-color: $white;
-    cursor: pointer;
-    transition: transform 0.25s ease;
-    display: flex;
-    flex-direction: column;
-    border: 1px solid black;
-    max-width: 40vh;
+.art-grid__details {
+  padding: 1rem;
+}
 
-    &:hover {
-      transform: scale(1.02);
-    }
-  }
+.art-grid__title {
+  font-size: 1.5rem;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto; 
+  white-space: normal; 
 
-  &__img {
-    width: 100%;
-    object-fit: cover;
-    aspect-ratio: 3/2;
-  }
 
-  &__details {
-    padding: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
 
-  }
-
-  &__title {
-    font-size: 1.2rem;
-    font-weight: 500;
-    margin-bottom: 0.3rem;
-  }
-
-  &__author {
-    font-size: 0.95rem;
-    color: #666;
-    font-weight: 400;
-  }
+.art-grid__author {
+  font-size: 0.9rem;
+  color: #666;
 }
 
 
-///////modal
 
 
+/* MODALE */
 .art-modal {
   position: fixed;
   inset: 0;
@@ -119,76 +144,82 @@ img {
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
-      border: 1px solid black;
+  border: 1px solid black;
   z-index: 100;
-
-  &.is-active {
-    display: flex;
-    animation: fadeIn 0.3s ease-out forwards;
-  }
-
-  &__backdrop {
-    position: absolute;
-    inset: 0;
-  }
-
-  &__content {
-    position: relative;
-    background-color: $white;
-    max-width: 600px;
-    width: 90%;
-    padding: 1rem;
-    z-index: 1;
-    display: grid;
-    gap: 1.2rem;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-    border:1px solid black;
-    animation: slideUp 0.3s ease-out forwards;
-  }
-
-  &__image {
-    width: 100%;
-    max-height: 320px;
-    object-fit: contain;
-  }
-
-  &__title {
-    font-size: 1.6rem;
-    font-weight: 500;
-    color: $primary-color;
-  }
-
-  &__artist {
-    font-size: 1rem;
-    color: #555;
-    font-weight: 400;
-  }
-
-  &__description {
-    font-size: 0.95rem;
-    color: #444;
-    font-weight: 300;
-    line-height: 1.5;
-  }
-
-  &__close {
-    position: absolute;
-    top: 1rem;
-    right: 1.5rem;
-    font-size: 2rem;
-    background: none;
-    border: none;
-    color: #333;
-    cursor: pointer;
-    transition: transform 0.2s;
-
-    &:hover {
-      transform: scale(1.2);
-    }
-  }
+  padding: 1rem;
+  overflow-y: auto; 
 }
 
-// ANIMATIONS
+.art-modal.is-active {
+  display: flex;
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.art-modal__backdrop {
+  position: absolute;
+  inset: 0;
+}
+
+.art-modal__content {
+  position: relative;
+  background-color: #f6f6f6;
+  max-width: 500px;
+  width: 100%;
+  max-height: 90vh; 
+  padding: 1rem;
+  z-index: 1;
+  display: grid;
+  gap: 1.2rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  border: 1px solid black;
+  animation: slideUp 0.3s ease-out forwards;
+  overflow-y: auto;
+}
+
+.art-modal__image {
+  width: 100%;
+  max-height: 320px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.art-modal__title {
+  font-size: 1.8rem;
+  font-weight: 500;
+  border-top: 1px solid black;
+  padding-top: 0.8rem;
+  color: #000000;
+}
+
+.art-modal__artist {
+  font-size: 1rem;
+  color: #555;
+  font-weight: 400;
+}
+
+.art-modal__description {
+  font-size: 1.1rem;
+  color: #444;
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+.art-modal__close {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: #333;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.art-modal__close:hover {
+  transform: scale(1.2);
+}
+
 @keyframes fadeIn {
   from {
     background-color: rgba(0, 0, 0, 0);
@@ -197,4 +228,3 @@ img {
     background-color: rgba(0, 0, 0, 0.5);
   }
 }
-
