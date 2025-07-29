@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       modalImage.alt = art.title;
       modalTitle.textContent = art.title;
       modalArtist.textContent = `Artiste : ${art.artistDisplayName || "Inconnu"}`;
-      modalDescription.textContent = `Date : ${art.objectDate || "N/A"}\nMedium : ${art.medium || "N/A"}`;
+      modalDescription.textContent = `Date : ${art.objectDate || "N/A"}\nDetails : ${art.medium || "N/A"}`;
 
       modal.classList.add("is-active");
     });

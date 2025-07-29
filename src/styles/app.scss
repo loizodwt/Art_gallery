@@ -1,5 +1,5 @@
-@import 'utils/variables';
-@import 'components/type';
+
+@import 'components/modal';
 
 
 @font-face {
@@ -18,6 +18,8 @@ html, body {
   color: #222;
   line-height: 1.4;
 }
+
+
 
 *,
 *::before,
@@ -42,19 +44,6 @@ html, body {
 }
 
 /* SCROLL HORIZONTAL */
-@font-face {
-  font-family: GaramondStd;
-  src: url("./fonts/ITCGaramondStd-LtCond.ttf");
-}
-
-html, body {
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  font-family: 'GaramondStd', serif;
-  background-color: #f6f6f6;
-  color: #222;
-}
 
 
 .art-grid-wrapper {
@@ -89,8 +78,8 @@ html, body {
   flex: 0 0 300px;
   height: 450px;
   scroll-snap-align: center;
-  background: white;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  background: rgb(252, 252, 252);
+
   border: 1px solid rgb(0, 0, 0);
   display: flex;
   flex-direction: column;
@@ -135,90 +124,6 @@ html, body {
 
 
 
-
-/* MODALE */
-.art-modal {
-  position: fixed;
-  inset: 0;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
-  border: 1px solid black;
-  z-index: 100;
-  padding: 1rem;
-  overflow-y: auto; 
-}
-
-.art-modal.is-active {
-  display: flex;
-  animation: fadeIn 0.3s ease-out forwards;
-}
-
-.art-modal__backdrop {
-  position: absolute;
-  inset: 0;
-}
-
-.art-modal__content {
-  position: relative;
-  background-color: #f6f6f6;
-  max-width: 500px;
-  width: 100%;
-  max-height: 90vh; 
-  padding: 1rem;
-  z-index: 1;
-  display: grid;
-  gap: 1.2rem;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-  border: 1px solid black;
-  animation: slideUp 0.3s ease-out forwards;
-  overflow-y: auto;
-}
-
-.art-modal__image {
-  width: 100%;
-  max-height: 320px;
-  object-fit: contain;
-  border-radius: 6px;
-}
-
-.art-modal__title {
-  font-size: 1.8rem;
-  font-weight: 500;
-  border-top: 1px solid black;
-  padding-top: 0.8rem;
-  color: #000000;
-}
-
-.art-modal__artist {
-  font-size: 1rem;
-  color: #555;
-  font-weight: 400;
-}
-
-.art-modal__description {
-  font-size: 1.1rem;
-  color: #444;
-  font-weight: 300;
-  line-height: 1.5;
-}
-
-.art-modal__close {
-  position: absolute;
-  top: 1rem;
-  right: 1.5rem;
-  font-size: 2rem;
-  background: none;
-  border: none;
-  color: #333;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-
-.art-modal__close:hover {
-  transform: scale(1.2);
-}
 
 @keyframes fadeIn {
   from {

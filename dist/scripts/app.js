@@ -122,7 +122,7 @@ document.addEventListener("DOMContentLoaded", /*#__PURE__*/_asyncToGenerator( /*
               modalImage.alt = art.title;
               modalTitle.textContent = art.title;
               modalArtist.textContent = "Artiste : ".concat(art.artistDisplayName || "Inconnu");
-              modalDescription.textContent = "Date : ".concat(art.objectDate || "N/A", "\nMedium : ").concat(art.medium || "N/A");
+              modalDescription.textContent = "Date : ".concat(art.objectDate || "N/A", "\nDetails : ").concat(art.medium || "N/A");
               modal.classList.add("is-active");
             });
             return card;

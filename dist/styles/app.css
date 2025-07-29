@@ -1,142 +1,3 @@
-body {
-  font-family: sans-serif;
-  font-size: 18px;
-  line-height: 1.5;
-  color: #444;
-}
-
-.title {
-  color: #e41612;
-}
-
-@font-face {
-  font-family: GaramondStd;
-  src: url("../assets/fonts/ITCGaramondStd-LtCond.ttf");
-}
-html, body {
-  height: auto;
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-  overflow-x: hidden;
-  font-family: "GaramondStd", serif;
-  background-color: #f6f6f6;
-  color: #222;
-  line-height: 1.4;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-.site-header__title {
-  font-size: 11rem;
-  margin-left: 10px;
-  color: #000000;
-  font-weight: 600;
-}
-
-.site-main {
-  padding: 2rem 1rem;
-  margin: 0 auto;
-}
-
-/* SCROLL HORIZONTAL */
-@font-face {
-  font-family: GaramondStd;
-  src: url("./fonts/ITCGaramondStd-LtCond.ttf");
-}
-html, body {
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-  font-family: "GaramondStd", serif;
-  background-color: #f6f6f6;
-  color: #222;
-}
-
-.art-grid-wrapper {
-  width: 100vw;
-  height: 100vh;
-  overflow-x: auto;
-  overflow-y: hidden;
-  -ms-scroll-snap-type: x mandatory;
-      scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  overflow-x: auto;
-  white-space: nowrap;
-  width: 100%;
-}
-
-.art-grid-wrapper::-webkit-scrollbar {
-  display: none;
-}
-
-.art-grid {
-  display: flex;
-  gap: 20px;
-  padding: 2rem;
-  align-items: center;
-  display: inline-flex;
-}
-
-/* Cartes */
-.art-grid__item {
-  flex: 0 0 300px;
-  height: 450px;
-  scroll-snap-align: center;
-  background: white;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgb(0, 0, 0);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  overflow: hidden;
-  transition: transform 0.3s;
-  pointer-events: auto;
-  cursor: pointer;
-  display: inline-block;
-  width: 200px;
-}
-
-.art-grid__item:hover {
-  transform: scale(1.03);
-}
-
-.art-grid__img {
-  width: 100%;
-  height: 200px;
-  -o-object-fit: cover;
-     object-fit: cover;
-}
-
-.art-grid__details {
-  padding: 1rem;
-}
-
-.art-grid__title {
-  font-size: 1.5rem;
-  word-break: break-word;
-  overflow-wrap: break-word;
-  -webkit-hyphens: auto;
-      -ms-hyphens: auto;
-          hyphens: auto;
-  white-space: normal;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-.art-grid__author {
-  font-size: 0.9rem;
-  color: #666;
-}
-
-/* MODALE */
 .art-modal {
   position: fixed;
   inset: 0;
@@ -221,6 +82,119 @@ html, body {
 
 .art-modal__close:hover {
   transform: scale(1.2);
+}
+
+@font-face {
+  font-family: GaramondStd;
+  src: url("../assets/fonts/ITCGaramondStd-LtCond.ttf");
+}
+html, body {
+  height: auto;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  font-family: "GaramondStd", serif;
+  background-color: #f6f6f6;
+  color: #222;
+  line-height: 1.4;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.site-header__title {
+  font-size: 11rem;
+  margin-left: 10px;
+  color: #000000;
+  font-weight: 600;
+}
+
+.site-main {
+  padding: 2rem 1rem;
+  margin: 0 auto;
+}
+
+/* SCROLL HORIZONTAL */
+.art-grid-wrapper {
+  width: 100vw;
+  height: 100vh;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -ms-scroll-snap-type: x mandatory;
+      scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  overflow-x: auto;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.art-grid-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.art-grid {
+  display: flex;
+  gap: 20px;
+  padding: 2rem;
+  align-items: center;
+  display: inline-flex;
+}
+
+/* Cartes */
+.art-grid__item {
+  flex: 0 0 300px;
+  height: 450px;
+  scroll-snap-align: center;
+  background: rgb(252, 252, 252);
+  border: 1px solid rgb(0, 0, 0);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden;
+  transition: transform 0.3s;
+  pointer-events: auto;
+  cursor: pointer;
+  display: inline-block;
+  width: 200px;
+}
+
+.art-grid__item:hover {
+  transform: scale(1.03);
+}
+
+.art-grid__img {
+  width: 100%;
+  height: 200px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.art-grid__details {
+  padding: 1rem;
+}
+
+.art-grid__title {
+  font-size: 1.5rem;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  -webkit-hyphens: auto;
+      -ms-hyphens: auto;
+          hyphens: auto;
+  white-space: normal;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.art-grid__author {
+  font-size: 0.9rem;
+  color: #666;
 }
 
 @-webkit-keyframes fadeIn {
