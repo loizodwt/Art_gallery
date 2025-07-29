@@ -1,14 +1,18 @@
+@font-face {
+  font-family: "ClashDisplay";
+  src: url("../assets/fonts/TTF/ClashDisplay-Variable.ttf") format("truetype");
+}
 *,
 *::before,
 *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: "ClashDisplay", sans-serif;
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f7f7f7;
+  background-color: #f6f6f6;
   color: #222;
   line-height: 1.6;
 }
@@ -19,20 +23,19 @@ img {
   height: auto;
 }
 
-.site-header {
-  color: black;
-}
-.site-header__inner {
+.site-header__container {
   max-width: 1200px;
   margin: 0 auto;
+  padding: 2rem 1rem;
 }
 .site-header__title {
-  font-size: 1.8rem;
+  font-size: 2.5rem;
+  color: #000000;
+  font-weight: 600;
 }
 
 .site-main {
-  padding: 2rem;
-  max-width: 1200px;
+  padding: 2rem 1rem;
   margin: 0 auto;
 }
 
@@ -47,34 +50,40 @@ img {
 
 .art-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  margin: 0 auto;
+  width: 100%;
 }
 .art-grid__item {
-  background-color: #fff;
-  overflow: hidden;
+  background-color: #f6f6f6;
   cursor: pointer;
-  transition: transform 0.2s ease;
+  transition: transform 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  max-width: 40vh;
 }
 .art-grid__item:hover {
-  transform: scale(1.05);
+  transform: scale(1.02);
 }
 .art-grid__img {
   width: 100%;
-  height: auto;
-  display: block;
+  -o-object-fit: cover;
+     object-fit: cover;
+  aspect-ratio: 3/2;
 }
 .art-grid__details {
   padding: 1rem;
 }
 .art-grid__title {
-  font-size: 1.1rem;
-  font-weight: bold;
+  font-size: 1.2rem;
+  font-weight: 500;
   margin-bottom: 0.3rem;
 }
 .art-grid__author {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: #666;
+  font-weight: 400;
 }
 
 .art-modal {
@@ -83,54 +92,86 @@ img {
   display: none;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 1px solid black;
   z-index: 100;
 }
 .art-modal.is-active {
   display: flex;
+  -webkit-animation: fadeIn 0.3s ease-out forwards;
+          animation: fadeIn 0.3s ease-out forwards;
 }
 .art-modal__backdrop {
   position: absolute;
   inset: 0;
 }
-.art-modal__box {
+.art-modal__content {
   position: relative;
-  background-color: #fff;
+  background-color: #f6f6f6;
   max-width: 600px;
   width: 90%;
-  padding: 1.5rem;
+  padding: 1rem;
   z-index: 1;
+  display: grid;
+  gap: 1.2rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  border: 1px solid black;
+  -webkit-animation: slideUp 0.3s ease-out forwards;
+          animation: slideUp 0.3s ease-out forwards;
 }
-.art-modal__img {
-  margin-bottom: 1rem;
-  max-height: 300px;
+.art-modal__image {
+  width: 100%;
+  max-height: 320px;
   -o-object-fit: contain;
      object-fit: contain;
-  width: 100%;
 }
 .art-modal__title {
-  font-size: 1.4rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: #000000;
 }
-.art-modal__author {
+.art-modal__artist {
   font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 0.8rem;
   color: #555;
+  font-weight: 400;
 }
 .art-modal__description {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: #444;
+  font-weight: 300;
+  line-height: 1.5;
 }
 .art-modal__close {
   position: absolute;
-  top: 0.5rem;
-  right: 1rem;
-  font-size: 1.5rem;
+  top: 1rem;
+  right: 1.5rem;
+  font-size: 2rem;
   background: none;
   border: none;
   color: #333;
   cursor: pointer;
+  transition: transform 0.2s;
+}
+.art-modal__close:hover {
+  transform: scale(1.2);
+}
+
+@-webkit-keyframes fadeIn {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  to {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  to {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
 }
 
 /*# sourceMappingURL=app.css.map*/

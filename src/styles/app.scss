@@ -1,19 +1,27 @@
-// Variables
-$bg-color: #f7f7f7;
-$text-color: #222;
-$primary-color: #0057a4;
-$white: #fff;
 
+// VARIABLES
+$bg-color: #f6f6f6;
+$text-color: #222;
+$primary-color: #000000;
+$white: #f6f6f6;
+
+@font-face {
+  font-family: 'ClashDisplay';
+  src: url('../assets/fonts/TTF/ClashDisplay-Variable.ttf') format('truetype');
+
+}
+
+// RESET & GLOBAL
 *,
 *::before,
 *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: 'ClashDisplay', sans-serif;
 }
 
 body {
-  font-family: Arial, sans-serif;
   background-color: $bg-color;
   color: $text-color;
   line-height: 1.6;
@@ -25,24 +33,23 @@ img {
   height: auto;
 }
 
-// Layout
-
+// LAYOUT
 .site-header {
-  color: black;
-
-  &__inner {
+  &__container {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 2rem 1rem;
   }
 
   &__title {
-    font-size: 1.8rem;
+    font-size: 2.5rem;
+    color: $primary-color;
+    font-weight: 600;
   }
 }
 
 .site-main {
-  padding: 2rem;
-  max-width: 1200px;
+  padding: 2rem 1rem;
   margin: 0 auto;
 }
 
@@ -56,47 +63,54 @@ img {
   }
 }
 
-// Grid
-
+// GRID
 .art-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  margin: 0 auto;
+  width: 100%;
 
   &__item {
     background-color: $white;
-    overflow: hidden;
     cursor: pointer;
-    transition: transform 0.2s ease;
+    transition: transform 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    max-width: 40vh;
 
     &:hover {
-      transform: scale(1.05);
+      transform: scale(1.02);
     }
   }
 
   &__img {
     width: 100%;
-    height: auto;
-    display: block;
+    object-fit: cover;
+    aspect-ratio: 3/2;
   }
 
   &__details {
     padding: 1rem;
+
   }
 
   &__title {
-    font-size: 1.1rem;
-    font-weight: bold;
+    font-size: 1.2rem;
+    font-weight: 500;
     margin-bottom: 0.3rem;
   }
 
   &__author {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: #666;
+    font-weight: 400;
   }
 }
 
-// Modal
+
+///////modal
+
 
 .art-modal {
   position: fixed;
@@ -104,11 +118,13 @@ img {
   display: none;
   justify-content: center;
   align-items: center;
-  background-color:white;
+  background-color: rgba(0, 0, 0, 0.5);
+      border: 1px solid black;
   z-index: 100;
 
   &.is-active {
     display: flex;
+    animation: fadeIn 0.3s ease-out forwards;
   }
 
   &__backdrop {
@@ -116,47 +132,69 @@ img {
     inset: 0;
   }
 
-  &__box {
+  &__content {
     position: relative;
     background-color: $white;
     max-width: 600px;
     width: 90%;
-    padding: 1.5rem;
+    padding: 1rem;
     z-index: 1;
+    display: grid;
+    gap: 1.2rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    border:1px solid black;
+    animation: slideUp 0.3s ease-out forwards;
   }
 
-  &__img {
-    margin-bottom: 1rem;
-    max-height: 300px;
-    object-fit: contain;
+  &__image {
     width: 100%;
+    max-height: 320px;
+    object-fit: contain;
   }
 
   &__title {
-    font-size: 1.4rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: $primary-color;
   }
 
-  &__author {
+  &__artist {
     font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: 0.8rem;
     color: #555;
+    font-weight: 400;
   }
 
   &__description {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: #444;
+    font-weight: 300;
+    line-height: 1.5;
   }
 
   &__close {
     position: absolute;
-    top: 0.5rem;
-    right: 1rem;
-    font-size: 1.5rem;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 2rem;
     background: none;
     border: none;
     color: #333;
     cursor: pointer;
+    transition: transform 0.2s;
+
+    &:hover {
+      transform: scale(1.2);
+    }
   }
 }
+
+// ANIMATIONS
+@keyframes fadeIn {
+  from {
+    background-color: rgba(0, 0, 0, 0);
+  }
+  to {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}
+

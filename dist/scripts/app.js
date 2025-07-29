@@ -35,15 +35,24 @@ document.addEventListener("DOMContentLoaded", function () {
   var modalTitle = document.querySelector(".art-modal__title");
   var modalArtist = document.querySelector(".art-modal__artist");
   var modalText = document.querySelector(".art-modal__description");
-  var modalClose = document.querySelector(".art-modal__close");
-  var modalBg = document.querySelector(".art-modal__backdrop"); // Fermeture modal
+  var closeBtn = document.querySelector(".art-modal__close");
+  var backdrop = document.querySelector(".art-modal__backdrop");
 
-  var closeModal = function closeModal() {
-    return modal.classList.remove("is-active");
-  };
+  function openModal(art) {
+    modalImg.src = art.primaryImageSmall;
+    modalImg.alt = art.title;
+    modalTitle.textContent = art.title;
+    modalArtist.textContent = art.artistDisplayName || "Artiste inconnu";
+    modalText.textContent = art.creditLine || "Aucune description disponible.";
+    modal.classList.add("is-active");
+  }
 
-  modalClose.addEventListener("click", closeModal);
-  modalBg.addEventListener("click", closeModal);
+  function closeModal() {
+    modal.classList.remove("is-active");
+  }
+
+  closeBtn.addEventListener("click", closeModal);
+  backdrop.addEventListener("click", closeModal);
 
   function fetchArt() {
     return _fetchArt.apply(this, arguments);
@@ -128,11 +137,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 card.classList.add("art-grid__item");
                 card.innerHTML = "\n          <img src=\"".concat(art.primaryImageSmall, "\" alt=\"").concat(art.title, "\" class=\"art-grid__img\" />\n          <div class=\"art-grid__details\">\n            <h2 class=\"art-grid__title\">").concat(art.title, "</h2>\n            <p class=\"art-grid__author\">").concat(art.artistDisplayName || "Artiste inconnu", "</p>\n          </div>\n        ");
                 card.addEventListener("click", function () {
-                  modalImg.src = art.primaryImageSmall;
-                  modalTitle.textContent = art.title;
-                  modalArtist.textContent = art.artistDisplayName || "Artiste inconnu";
-                  modalText.textContent = art.creditLine || "Aucune description disponible.";
-                  modal.classList.add("is-active");
+                  return openModal(art);
                 });
                 grid.appendChild(card);
               });

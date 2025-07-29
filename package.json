@@ -23,6 +23,7 @@
   "devDependencies": {
     "browser-sync": "^2.27.7",
     "browser-sync-webpack-plugin": "^2.3.0",
+    "html-webpack-plugin": "^5.6.3",
     "laravel-mix": "^6.0.41",
     "rimraf": "^3.0.2",
     "sass": "^1.49.0",
