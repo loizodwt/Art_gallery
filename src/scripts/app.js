@@ -63,13 +63,23 @@ document.addEventListener("DOMContentLoaded", async () => {
     return card;
   }
 
-  function cloneCards(cards) {
-    return cards.map(card => {
+  function cloneCards(cards, arts) {
+    return cards.map((card, i) => {
       const clone = card.cloneNode(true);
       clone.classList.add("clone");
+      clone.addEventListener("click", () => {
+        const art = arts[i]; 
+        modalImage.src = art.primaryImage || art.primaryImageSmall;
+        modalImage.alt = art.title;
+        modalTitle.textContent = art.title;
+        modalArtist.textContent = `Artiste : ${art.artistDisplayName || "Inconnu"}`;
+        modalDescription.textContent = `Date : ${art.objectDate || "N/A"}\nDetails : ${art.medium || "N/A"}`;
+        modal.classList.add("is-active");
+      });
       return clone;
     });
   }
+
 
   async function init() {
     const arts = await fetchArts();
@@ -83,7 +93,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const cards = arts.map(createCard);
     cards.forEach(card => grid.appendChild(card));
 
-    const clones = cloneCards(cards);
+    const clones = cloneCards(cards, arts);
     clones.forEach(clone => grid.appendChild(clone));
 
     const totalWidth = grid.scrollWidth;

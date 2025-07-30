@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", /*#__PURE__*/_asyncToGenerator( /*
                       cards.forEach(function (card) {
                         return grid.appendChild(card);
                       });
-                      clones = cloneCards(cards);
+                      clones = cloneCards(cards, arts);
                       clones.forEach(function (clone) {
                         return grid.appendChild(clone);
                       });
@@ -105,10 +105,19 @@ document.addEventListener("DOMContentLoaded", /*#__PURE__*/_asyncToGenerator( /*
             return _init.apply(this, arguments);
           };
 
-          cloneCards = function _cloneCards(cards) {
-            return cards.map(function (card) {
+          cloneCards = function _cloneCards(cards, arts) {
+            return cards.map(function (card, i) {
               var clone = card.cloneNode(true);
               clone.classList.add("clone");
+              clone.addEventListener("click", function () {
+                var art = arts[i];
+                modalImage.src = art.primaryImage || art.primaryImageSmall;
+                modalImage.alt = art.title;
+                modalTitle.textContent = art.title;
+                modalArtist.textContent = "Artiste : ".concat(art.artistDisplayName || "Inconnu");
+                modalDescription.textContent = "Date : ".concat(art.objectDate || "N/A", "\nDetails : ").concat(art.medium || "N/A");
+                modal.classList.add("is-active");
+              });
               return clone;
             });
           };

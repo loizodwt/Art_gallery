@@ -10,18 +10,15 @@
   padding: 1rem;
   overflow-y: auto;
 }
-
 .art-modal.is-active {
   display: flex;
   -webkit-animation: fadeIn 0.3s ease-out forwards;
           animation: fadeIn 0.3s ease-out forwards;
 }
-
 .art-modal__backdrop {
   position: absolute;
   inset: 0;
 }
-
 .art-modal__content {
   position: relative;
   background-color: #f6f6f6;
@@ -38,37 +35,32 @@
           animation: slideUp 0.3s ease-out forwards;
   overflow-y: auto;
 }
-
-.art-modal__image {
+.art-modal__content .art-modal__image {
   width: 100%;
   max-height: 320px;
   -o-object-fit: contain;
      object-fit: contain;
   border-radius: 6px;
 }
-
-.art-modal__title {
+.art-modal__content .art-modal__title {
   font-size: 1.8rem;
   font-weight: 500;
   border-top: 1px solid black;
   padding-top: 0.8rem;
-  color: #000000;
+  color: #000;
 }
-
-.art-modal__artist {
+.art-modal__content .art-modal__artist {
   font-size: 1rem;
   color: #555;
   font-weight: 400;
 }
-
-.art-modal__description {
+.art-modal__content .art-modal__description {
   font-size: 1.1rem;
   color: #444;
   font-weight: 300;
   line-height: 1.5;
 }
-
-.art-modal__close {
+.art-modal__content .art-modal__close {
   position: absolute;
   top: 1rem;
   right: 1.5rem;
@@ -79,8 +71,7 @@
   cursor: pointer;
   transition: transform 0.2s;
 }
-
-.art-modal__close:hover {
+.art-modal__content .art-modal__close:hover {
   transform: scale(1.2);
 }
 
@@ -100,9 +91,7 @@ html, body {
   line-height: 1.4;
 }
 
-*,
-*::before,
-*::after {
+*, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -111,7 +100,7 @@ html, body {
 .site-header__title {
   font-size: 11rem;
   margin-left: 10px;
-  color: #000000;
+  color: #000;
   font-weight: 600;
 }
 
@@ -120,7 +109,6 @@ html, body {
   margin: 0 auto;
 }
 
-/* SCROLL HORIZONTAL */
 .art-grid-wrapper {
   width: 100vw;
   height: 100vh;
@@ -130,25 +118,20 @@ html, body {
       scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  overflow-x: auto;
   white-space: nowrap;
   width: 100%;
 }
-
 .art-grid-wrapper::-webkit-scrollbar {
   display: none;
 }
-
-.art-grid {
+.art-grid-wrapper .art-grid {
   display: flex;
   gap: 20px;
   padding: 2rem;
   align-items: center;
   display: inline-flex;
 }
-
-/* Cartes */
-.art-grid__item {
+.art-grid-wrapper .art-grid .art-grid__item {
   flex: 0 0 300px;
   height: 450px;
   scroll-snap-align: center;
@@ -164,23 +147,19 @@ html, body {
   display: inline-block;
   width: 200px;
 }
-
-.art-grid__item:hover {
+.art-grid-wrapper .art-grid .art-grid__item:hover {
   transform: scale(1.03);
 }
-
-.art-grid__img {
+.art-grid-wrapper .art-grid .art-grid__item .art-grid__img {
   width: 100%;
   height: 200px;
   -o-object-fit: cover;
      object-fit: cover;
 }
-
-.art-grid__details {
+.art-grid-wrapper .art-grid .art-grid__item .art-grid__details {
   padding: 1rem;
 }
-
-.art-grid__title {
+.art-grid-wrapper .art-grid .art-grid__item .art-grid__details .art-grid__title {
   font-size: 1.5rem;
   word-break: break-word;
   overflow-wrap: break-word;
@@ -191,8 +170,7 @@ html, body {
   font-weight: 600;
   margin-bottom: 0.5rem;
 }
-
-.art-grid__author {
+.art-grid-wrapper .art-grid .art-grid__item .art-grid__details .art-grid__author {
   font-size: 0.9rem;
   color: #666;
 }
